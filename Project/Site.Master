@@ -1,0 +1,187 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="Project.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>J.P. Event - Book Your Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="shortcut icon" href="/images/icon.jpg" type="image/x-icon" />
+    <style>
+.gridcol {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        justify-content: space-around;
+        padding: 0 0 50px 0;
+
+    }
+        </style>
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <!-- Header Section Starts -->
+
+        <div id="header" class="relative z-10">
+             
+                    <header >
+                        <div class="flex bg-purple-900  justify-between px-10 items-center h-20 fixed w-full ">
+                            <div>
+                                <h1 class="text-white text-3xl font-jmh uppercase">J.P. Events</h1>
+                            </div>
+                            <div>
+                                <ul class="flex gap-16">
+                                    <li><a href="/index.aspx" class="text-white hover:underline text-2xl ">Home</a></li>
+                                    <li><a href="/pages/events.aspx" class="text-white hover:underline text-2xl ">Events</a></li>
+                                    <li><a href="/pages/services.aspx" class="text-white hover:underline text-2xl ">Services</a></li>
+                                    <li><a href="/pages/contact.aspx" class="text-white hover:underline text-2xl ">Contact</a></li>
+                                    <li><a href="/pages/AboutUs.aspx" class="text-white hover:underline text-2xl ">About Us</a></li>
+                                </ul>
+                            </div>
+                            <div class="flex gap-5">
+                                <span id="regbtn" class="cursor-pointer border border-transparent hover:border-white duration-300 rounded-xl pt-2 pb-2 px-10 py-10 text-white bg-purple-700 text-xl flex items-center justify-center" runat="server">Register</span>
+                                <span id="loginbtn" class="cursor-pointer border border-transparent hover:border-white duration-300 rounded-xl pt-2 pb-2 px-10 py-10 text-white bg-purple-700 text-xl" runat="server">Log In</span>
+              
+                            </div>
+                        </div>
+                    </header>
+
+                <div class="flex h-screen bg-[#0000009e] fixed w-full z-3  items-center justify-center hidden" id="login_form" runat="server">
+                    <div class="flex flex-col justify-center gap-8 text-center relative bg-white w-1/4 p-8 rounded m-auto ">
+                        <button type="button" runat="server" onclick="closeLoginForm()" id="login_close_btn" class="cursor-pointer font-bold hover:text-red-600 text-right text-xl">&#x2715;    </button>               <span class="font-bold text-3xl">Login</span>
+                        <input runat="server" id="login_un" class="outline-0 border border-fuchsia-700 p-2 rounded w-full" type="text" placeholder="Enter Username" />
+                        <div class="relative">
+                            <input runat="server" id="Password" class="outline-0 border border-fuchsia-700 p-2 rounded w-full mt-[-20px]" type="password" placeholder="Enter Password" />
+                            <span type="button" id="btnShowHide" onclick="togglePasswordVisibility('Password','eyeIcon')" class=" cursor-pointer eye-button absolute top-1/2 right-4 transform -translate-y-1/2 pb-[11px] ">
+                                <span id="eyeIcon" class="text-[15px]">Show</span>
+              
+                            </span>
+                        </div>
+                        <asp:Button type="button" ID="login_button" runat="server" Text="Login" class=" w-full border border-transparent hover:border-white duration-300 rounded-xl pt-1 pb-1 px-10 py-10 text-white bg-purple-700 text-xl flex items-center justify-center cursor-pointer" OnClick="login_button_Click" />
+                        <label runat="server" class="text-red-500 " id="error"></label>
+                        </div>
+                </div>
+
+                <div class="flex h-screen  bg-[#0000009e] fixed w-full z-3 items-center justify-center hidden " id="reg_form" runat="server">
+                    <div class="flex flex-col justify-center gap-8 text-center relative bg-white w-1/4 p-8 rounded m-auto ">
+                        <span onclick="closeRegForm()" class="cursor-pointer font-bold hover:text-red-600 text-right text-xl">&#x2715;  </span>               <span class="font-bold text-3xl">Register</span>
+                        <input runat="server" id="regusername" class="outline-0 border border-fuchsia-700 p-2 rounded w-full" type="text" placeholder="Enter Username" />
+                        <div class="relative">
+                            <input runat="server" id="Password1" class="outline-0 border border-fuchsia-700 p-2 rounded w-full mt-[-20px]" type="password" placeholder="Enter Password" />
+                            <span type="button" id="btnShowHide1" onclick="togglePasswordVisibility('Password1','eyeIcon1')" class="cursor-pointer eye-button absolute top-1/2 right-4 transform -translate-y-1/2 pb-[11px] ">
+                                <span id="eyeIcon1" class="text-[15px]">Show</span>
+                            </span>
+                        </div>
+                        <div class="relative">
+                            <input runat="server" id="Password2" class="outline-0 border border-fuchsia-700 p-2 rounded w-full mt-[-20px]" type="password" placeholder="Re-Type Password" />
+                            <span type="button" id="btnShowHide2" onclick="togglePasswordVisibility('Password2','eyeIcon2')" class=" cursor-pointer eye-button absolute top-1/2 right-4 transform -translate-y-1/2 pb-[11px] ">
+                                <span id="eyeIcon2" class="text-[15px]">Show</span>
+                            </span>
+                        </div>
+                        <asp:Button ID="sign_up_btn" runat="server" Text="Sign Up" class=" w-full border border-transparent hover:border-white duration-300 rounded-xl pt-1 pb-1 px-10 py-10 text-white bg-purple-700 text-xl flex items-center justify-center cursor-pointer" OnClick="sign_up_btn_Click" />
+                    </div>
+                </div>
+            </div>
+        
+
+        <!-- Header Section Ends -->
+
+        <!-- Main Section Ends -->
+
+        <div class="main-content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <!-- Main Section Ends -->
+
+
+        <!-- Footer Section Ends -->
+
+        <div id="footer">
+            <footer>
+                <div class="bg-black px-[50px] text-white flex h-36 items-center justify-around">
+                    <div>
+                        <h1 class="text-white text-xl font-jmh uppercase">J.P. Events</h1>
+                        <p class="text-white text-sm">Book Now or Cry Later</p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-[30px] ">
+                        <a href="/index.aspx" class="hover:underline ">Home</a>
+                        <a href="/pages/events.aspx" class="hover:underline ">Events</a>
+                        <a href="/pages/services.aspx" class="hover:underline ">Services</a>
+                        <a href="/pages/contact.aspx" class="hover:underline ">Contact</a>
+                        <a href="/pages/aboutUs.aspx" class="hover:underline ">About Us</a>
+                        <a href="index.aspx" class="hover:underline hover:text-red-500 ">Help and Support</a>
+
+                    </div>
+                    <div>
+                        <p>&#169; Copyright All Right Reserved by J.P.Events</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Footer Section Ends -->
+
+    </form>
+    <!-- script for toggle login ref form -->
+
+
+    <script>
+
+
+        var currentUrl = window.location.href;
+        var url = new URL(currentUrl);
+        var error = url.searchParams.get("error");
+
+        if (error) {
+            document.getElementById('login_form').style.display = "flex";
+            document.getElementById("error").textContent = "check username or password";
+            document.getElementById('login_un').focus()
+        }
+
+
+        function togglePasswordVisibility(id, id2) {
+            let element = document.getElementById(id);
+            let element2 = document.getElementById(id2);
+
+            if (element.type === "password") {
+                element.type = "text";
+                element2.innerHTML = "Hide";
+            } else {
+                element.type = "password";
+                element2.innerHTML = "Show";
+            }
+        }
+
+        function closeLoginForm() {
+            document.getElementById('login_form').style.display = "none";
+            window.location.href = "index.aspx"
+        }
+
+        function closeRegForm() {
+            document.getElementById('reg_form').style.display = "none";
+        }
+
+        let reg_btn = document.getElementById('regbtn');
+        let login_btn = document.getElementById('loginbtn');
+
+        login_btn.addEventListener('click', () => {
+            document.getElementById('login_form').style.display = "flex";
+        });
+
+        reg_btn.addEventListener('click', () => {
+            document.getElementById('reg_form').style.display = "flex";
+        });
+
+
+    </script>
+</body>
+
+</html>
