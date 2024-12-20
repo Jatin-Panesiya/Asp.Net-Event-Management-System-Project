@@ -9,6 +9,6 @@ namespace Project
 {
     public class Class1
     {
-        public static SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnectiosn"].ConnectionString);
+        public static SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
     }
 }

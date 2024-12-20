@@ -23,7 +23,7 @@
 
         <section class="flex items-center justify-around h-full">
             <div class="grid items-center">
-                <p class="text-white text-6xl font-yellowtail ml-7">Make Everys</p>
+                <p class="text-white text-6xl font-yellowtail ml-7">Make Every</p>
                 <p class="text-white text-10xl uppercase font-bungee">Event</p>
                 <p class="text-white text-10xl only:uppercase font-bungee">Crazy</p>
 
